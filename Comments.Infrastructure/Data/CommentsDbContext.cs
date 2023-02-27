@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Comments.Application.Common.Interfaces;
 using Comments.Domain.Entities;
+using Comments.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Comments.Infrastructure.Data
@@ -13,6 +14,13 @@ namespace Comments.Infrastructure.Data
         public CommentsDbContext(DbContextOptions<CommentsDbContext> options): base(options){}
 
         public DbSet<Comment> Comments { get; set; }
+        
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfigurationsFromAssembly(typeof(CommentConfiguration).Assembly);
+        }
         
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

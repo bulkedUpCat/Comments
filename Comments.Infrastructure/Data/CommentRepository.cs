@@ -19,12 +19,16 @@ namespace Comments.Infrastructure.Data
         
         public async Task<IEnumerable<Comment>> GetAllAsync(CancellationToken cancellationToken)
         {
-            return await _context.Comments.ToListAsync(cancellationToken);
+            return await _context.Comments
+                .Include(c => c.Replies)
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task<Comment> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<Comment?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            return await _context.Comments.FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+            return await _context.Comments
+                .Include(c => c.Replies)
+                .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
         }
 
         public async Task CreateAsync(Comment comment, CancellationToken cancellationToken)

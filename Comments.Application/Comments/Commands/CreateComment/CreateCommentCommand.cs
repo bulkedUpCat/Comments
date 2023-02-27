@@ -1,4 +1,5 @@
-﻿using Comments.Application.Models.Comment;
+﻿using System;
+using Comments.Application.Models.Comment;
 using MediatR;
 
 namespace Comments.Application.Comments.Commands.CreateComment
@@ -9,5 +10,6 @@ namespace Comments.Application.Comments.Commands.CreateComment
         public string Email { get; set; }
         public string HomePage { get; set; }
         public string Text { get; set; }
+        public Guid? ParentCommentId { get; set; }
     }
 }
