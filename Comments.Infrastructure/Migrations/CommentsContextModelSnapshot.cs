@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Comments.Infrastructure.Migrations
 {
-    [DbContext(typeof(CommentsContext))]
+    [DbContext(typeof(CommentsDbContext))]
     partial class CommentsContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

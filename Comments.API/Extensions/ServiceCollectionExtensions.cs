@@ -11,7 +11,7 @@ namespace Comments.API.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddDbContext<CommentsContext>(options =>
+            services.AddDbContext<CommentsDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
