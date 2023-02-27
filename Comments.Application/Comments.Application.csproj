@@ -4,4 +4,13 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Comments.Domain\Comments.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Comments\Commands" />
+      <Folder Include="Comments\Queries" />
+    </ItemGroup>
+
 </Project>
