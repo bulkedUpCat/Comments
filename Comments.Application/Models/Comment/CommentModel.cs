@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Comments.Domain.Entities
+namespace Comments.Application.Models.Comment
 {
-    public class Comment: AuditEntity<Guid>
+    public class CommentModel
     {
+        public Guid Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string HomePage { get; set; }

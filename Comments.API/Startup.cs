@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Comments.API.Extensions;
+using Comments.Application.Extensions;
 using Comments.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +25,7 @@ namespace Comments.API
         }
 
         public IConfiguration Configuration { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -35,8 +36,10 @@ namespace Comments.API
 
             services.ConfigureDbContext(Configuration);
             services.ConfigureRepositories();
+            services.ConfigureMediator();
+            services.ConfigureAutoMapper();
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

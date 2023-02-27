@@ -9,6 +9,7 @@ namespace Comments.Infrastructure.Extensions
         public static IServiceCollection ConfigureRepositories(
             this IServiceCollection services)
         {
+            services.AddScoped<ICommentsDbContext, CommentsDbContext>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             return services;
         }
