@@ -38,10 +38,13 @@ namespace Comments.API
             services.ConfigureRepositories();
             services.ConfigureMediator();
             services.ConfigureAutoMapper();
+            services.ConfigureCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

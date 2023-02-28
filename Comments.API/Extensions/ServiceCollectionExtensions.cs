@@ -26,5 +26,22 @@ namespace Comments.API.Extensions
             services.AddAutoMapper(typeof(CommentProfile));
             return services;
         }
+        
+        public static IServiceCollection ConfigureCors(
+            this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+            return services;
+        }
     }
 }

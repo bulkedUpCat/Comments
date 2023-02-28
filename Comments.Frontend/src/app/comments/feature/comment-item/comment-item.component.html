@@ -1,1 +1,53 @@
-<p>comment-item works!</p>
+<div class="comment-container">
+  <div class="comment-container__heading">
+    <svg class="comment-container__heading-image">
+      <use xlink:href="../../assets/svg/sprite.svg#user"></use>
+    </svg>
+    <p class="comment-container__heading-user-name">{{comment.userName}}</p>
+    <p class="comment-container__heading-date">{{comment.createdAt | date: 'dd.MM.YY'}}</p>
+    <div class="comment-container__heading-sorting">
+      <svg class="comment-container__heading-sorting-image">
+        <use xlink:href="../../assets/svg/sprite.svg#arrow-up"></use>
+      </svg>
+      <p>0</p>
+      <svg class="comment-container__heading-sorting-image">
+        <use xlink:href="../../assets/svg/sprite.svg#arrow-down"></use>
+      </svg>
+    </div>
+  </div>
+
+  <div class="comment-container__body">
+    <p class="comment-container__body-text">{{comment.text}}</p>
+  </div>
+
+  <div class="comment-container__actions">
+    <button
+      *ngIf="canReply"
+      class="comment-container__actions-action"
+    >
+      Reply
+    </button>
+    <button
+      *ngIf="canEdit"
+      class="comment-container__actions-action"
+    >
+      Edit
+    </button>
+    <button
+      *ngIf="canDelete"
+      class="comment-container__actions-action"
+    >
+      Delete
+    </button>
+  </div>
+
+  <div class="reply-container">
+    <comment-item
+      *ngFor="let reply of comment.replies"
+      [comment]="reply"
+    >
+    </comment-item>
+  </div>
+</div>
+
+

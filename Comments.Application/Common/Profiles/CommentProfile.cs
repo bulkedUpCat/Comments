@@ -9,7 +9,9 @@ namespace Comments.Application.Common.Profiles
     {
         public CommentProfile()
         {
-            CreateMap<Comment, CommentModel>();
+            CreateMap<Comment, CommentModel>()
+                .ForMember(dest => dest.CreatedAt, src => src.MapFrom(opt => opt.CreatedAt));
+                
             CreateMap<CreateCommentCommand, Comment>();
         }
     }

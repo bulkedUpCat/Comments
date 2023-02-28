@@ -1,9 +1,13 @@
 <div class="comments-container">
-  <h1>here</h1>
+  <comment-form
+    (handleSubmit)="onAddComment($event)"
+  ></comment-form>
   <div
     class="comments-container__item"
     *ngFor="let comment of comments"
   >
-    <comment-item></comment-item>
+    <comment-item
+      [comment]="comment"
+    ></comment-item>
   </div>
 </div>

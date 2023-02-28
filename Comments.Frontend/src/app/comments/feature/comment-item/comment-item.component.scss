@@ -1,0 +1,56 @@
+@import 'variables';
+
+.comment-container{
+  font-size: $font-size-default;
+  margin-bottom: 2rem;
+
+  &__heading{
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: $color-grey-light;
+
+    &-image{
+      width: 5rem;
+      height: 5rem;
+      margin-right: 2rem;
+    }
+
+    &-user-name{
+      font-weight: 600;
+      margin-right: 1rem;
+    }
+
+    &-sorting{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: auto;
+
+      &-image{
+        width: 4rem;
+        height: 4rem;
+      }
+    }
+  }
+
+  &__actions{
+    display: flex;
+    justify-content: flex-end;
+
+    &-action{
+      padding: .5rem;
+      font-size: $font-size-default;
+      cursor: pointer;
+
+      &:not(:last-child){
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.reply-container{
+  margin-left: 3rem;
+}
