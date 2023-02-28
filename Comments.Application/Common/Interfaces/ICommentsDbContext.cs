@@ -8,6 +8,7 @@ namespace Comments.Application.Common.Interfaces
     public interface ICommentsDbContext
     {
         DbSet<Comment> Comments { get; set; }
+        DbSet<User> Users { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

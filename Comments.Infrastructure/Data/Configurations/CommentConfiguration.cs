@@ -11,6 +11,10 @@ namespace Comments.Infrastructure.Data.Configurations
             builder
                 .HasMany(c => c.Replies)
                 .WithOne(c => c.ParentComment);
+
+            builder
+                .HasOne(c => c.User)
+                .WithMany(u => u.Comments);
         }
     }
 }

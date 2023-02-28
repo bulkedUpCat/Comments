@@ -14,7 +14,8 @@ namespace Comments.Infrastructure.Data
         public CommentsDbContext(DbContextOptions<CommentsDbContext> options): base(options){}
 
         public DbSet<Comment> Comments { get; set; }
-        
+        public DbSet<User> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
