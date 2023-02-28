@@ -45,6 +45,7 @@
 
   <comment-form
     *ngIf="isReply()"
+    [hasCancelButton]="true"
     (handleSubmit)="onAddComment($event)"
     (handleCancel)="onCancelComment()"
   >

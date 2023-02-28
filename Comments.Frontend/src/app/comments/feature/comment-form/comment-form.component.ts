@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CreateCommentModel } from 'src/app/models/comment';
 
@@ -13,10 +13,12 @@ export class CommentFormComponent implements OnInit {
     toolbar: [
       ['bold','italic','code']
     ]
-  }
+  };
+  captcha: string = '';
 
-  @Output() handleSubmit = new EventEmitter<string>();
-  @Output() handleCancel = new EventEmitter<void>();
+  @Input() hasCancelButton: boolean = false;
+  @Output() handleSubmit: EventEmitter<string> = new EventEmitter<string>();
+  @Output() handleCancel: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private fb: UntypedFormBuilder) { }
 
@@ -45,5 +47,10 @@ export class CommentFormComponent implements OnInit {
     //   console.log('too long');
     //   event.editor.deleteText(10, event.editor.getLength());
     // }
+  }
+
+  resolved(captchaResponse: string){
+    this.captcha = captchaResponse;
+    console.log(this.captcha);
   }
 }

@@ -1,5 +1,6 @@
 <div class="comments-container">
   <comment-form
+    [hasCancelButton]="false"
     (handleSubmit)="onAddComment({text: $event, parentCommentId: undefined})"
   ></comment-form>
   <div

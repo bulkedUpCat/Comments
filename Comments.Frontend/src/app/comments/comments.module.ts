@@ -5,6 +5,7 @@ import { CommentsListComponent } from './feature/comments-list/comments-list.com
 import { CommentFormComponent } from './feature/comment-form/comment-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { QuillModule } from 'ngx-quill';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    QuillModule
+    QuillModule,
+    RecaptchaModule
   ]
 })
 export class CommentsModule { }

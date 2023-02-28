@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommentsModule } from './comments/comments.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CommentsModule } from './comments/comments.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommentsModule
+    CommentsModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

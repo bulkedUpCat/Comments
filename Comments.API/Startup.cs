@@ -39,6 +39,9 @@ namespace Comments.API
             services.ConfigureMediator();
             services.ConfigureAutoMapper();
             services.ConfigureCors();
+            services.ConfigureConfigOptions(Configuration);
+            services.ConfigureAuthServices();
+            services.ConfigureAuthentication(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -56,6 +59,7 @@ namespace Comments.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

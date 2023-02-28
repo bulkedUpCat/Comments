@@ -5,18 +5,27 @@
 >
   <quill-editor
     formControlName="text"
-    class="form-container__text"
+    class="form-container__editor"
     [modules]="editorConfig"
     (onContentChanged)="onEditorContentChange($event)"
+    [placeholder]="'Type here...'"
   >
   </quill-editor>
+
+  <re-captcha
+    class="form-container__captcha"
+    (resolved)="resolved($event)"
+    siteKey="6Le_JcAkAAAAAKJrYCzKe3Ure2nonyQdKmyHn2jy"
+  ></re-captcha>
 
   <div class="form-container__action-buttons">
     <button
       class="form-container__submit-btn"
       type="submit"
+      [disabled]="!captcha"
     >Submit</button>
     <button
+      *ngIf="hasCancelButton"
       class="form-container__cancel-btn"
       type="button"
       (click)="onCancel()"

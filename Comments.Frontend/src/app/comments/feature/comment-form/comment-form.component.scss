@@ -12,10 +12,8 @@
     }
   }
 
-  &__text{
+  &__editor{
     width: 100%;
-    padding: 1rem;
-    font-size: $font-size-default;
   }
 
   &__action-buttons{
@@ -29,5 +27,9 @@
     padding: 1rem;
     cursor: pointer;
     font-size: $font-size-default;
+  }
+
+  &__captcha{
+    margin: 2rem;
   }
 }
