@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommentModel, CurrentComment } from 'src/app/models/comment';
+import { CommentModel, CreateCommentModel, CurrentComment } from 'src/app/models/comment';
 import { CommentService } from '../../data-access/comment.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { CommentService } from '../../data-access/comment.service';
 })
 export class CommentsListComponent implements OnInit {
   comments: CommentModel[] = [];
-  currentComment!: CurrentComment;
+  currentComment!: CurrentComment | null;
 
   constructor(private commentService: CommentService) { }
 
@@ -24,7 +24,12 @@ export class CommentsListComponent implements OnInit {
     })
   }
 
-  onAddComment(event: string){
-    console.log(event);
+  onAddComment(model: CreateCommentModel){
+    console.log(model.text, model.parentCommentId);
+  }
+
+  onSetCurrentComment(currentComment: CurrentComment | null){
+    console.log(currentComment);
+    this.currentComment = currentComment;
   }
 }

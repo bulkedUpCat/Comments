@@ -8,10 +8,8 @@ export class CommentModel{
 }
 
 export class CreateCommentModel{
-  userName!: string;
-  email!: string;
   text!: string;
-  parentCommentId!: string;
+  parentCommentId: string | undefined;
 }
 
 export class CurrentComment{

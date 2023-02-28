@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Comments.Application.Comments.Commands.CreateComment;
 using Comments.Application.Comments.Queries.GetAllComments;
+using Comments.Application.Comments.Queries.GetAllReplies;
 using Comments.Application.Comments.Queries.GetCommentById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,12 @@ namespace Comments.API.Controllers
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             return Ok(await _mediator.Send(new GetAllCommentsQuery(), cancellationToken));
+        }
+
+        [HttpGet("{id:guid}/replies")]
+        public async Task<IActionResult> GetAllReplies(Guid id, CancellationToken cancellationToken)
+        {
+            return Ok(await _mediator.Send(new GetAllRepliesQuery { ParentCommentId = id }, cancellationToken));
         }
 
         [HttpGet("{id:guid}", Name = nameof(GetById))]

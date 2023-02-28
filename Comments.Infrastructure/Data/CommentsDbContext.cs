@@ -22,6 +22,11 @@ namespace Comments.Infrastructure.Data
             builder.ApplyConfigurationsFromAssembly(typeof(CommentConfiguration).Assembly);
         }
         
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+        
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             AddAuditEntityProperties();

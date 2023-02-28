@@ -1,6 +1,6 @@
 <div class="comments-container">
   <comment-form
-    (handleSubmit)="onAddComment($event)"
+    (handleSubmit)="onAddComment({text: $event, parentCommentId: undefined})"
   ></comment-form>
   <div
     class="comments-container__item"
@@ -8,6 +8,9 @@
   >
     <comment-item
       [comment]="comment"
+      [currentComment]="currentComment"
+      (setCurrentComment)="onSetCurrentComment($event)"
+      (addComment)="onAddComment($event)"
     ></comment-item>
   </div>
 </div>

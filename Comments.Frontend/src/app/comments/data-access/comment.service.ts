@@ -15,6 +15,10 @@ export class CommentService {
     return this.http.get<CommentModel[]>(environment.apiUrl + 'comments');
   }
 
+  getAllReplies(parentCommentId: string): Observable<CommentModel[]>{
+    return this.http.get<CommentModel[]>(environment.apiUrl + parentCommentId + '/replies');
+  }
+
   createComment(model: CreateCommentModel): Observable<CommentModel>{
     return this.http.post<CommentModel>(environment.apiUrl + 'comments', model);
   }

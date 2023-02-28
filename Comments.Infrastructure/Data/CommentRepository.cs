@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Comments.Application.Common.Interfaces;
@@ -20,7 +21,15 @@ namespace Comments.Infrastructure.Data
         public async Task<IEnumerable<Comment>> GetAllAsync(CancellationToken cancellationToken)
         {
             return await _context.Comments
-                .Include(c => c.Replies)
+                .Where(c => c.ParentComment == null)
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<Comment>> GetAllByParentIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await _context.Comments
+                .Include(c => c.ParentComment)
+                .Where(c => c.ParentComment.Id == id)
                 .ToListAsync(cancellationToken);
         }
 

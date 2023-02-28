@@ -24,12 +24,14 @@
     <button
       *ngIf="canReply"
       class="comment-container__actions-action"
+      (click)="onSetCurrentComment({id: comment.id, type: currentCommentType.reply})"
     >
       Reply
     </button>
     <button
       *ngIf="canEdit"
       class="comment-container__actions-action"
+      (click)="onSetCurrentComment({id: comment.id, type: currentCommentType.edit})"
     >
       Edit
     </button>
@@ -41,10 +43,20 @@
     </button>
   </div>
 
+  <comment-form
+    *ngIf="isReply()"
+    (handleSubmit)="onAddComment($event)"
+    (handleCancel)="onCancelComment()"
+  >
+  </comment-form>
+
   <div class="reply-container">
     <comment-item
       *ngFor="let reply of comment.replies"
       [comment]="reply"
+      [currentComment]="currentComment"
+      (setCurrentComment)="onSetCurrentComment($event)"
+      (addComment)="addComment.emit($event)"
     >
     </comment-item>
   </div>

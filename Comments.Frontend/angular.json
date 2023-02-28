@@ -112,5 +112,7 @@
       }
     }
   },
-  "defaultProject": "Comments.Frontend"
+  "cli": {
+    "analytics": false
+  }
 }
