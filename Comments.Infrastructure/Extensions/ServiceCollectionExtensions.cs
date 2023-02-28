@@ -11,6 +11,8 @@ namespace Comments.Infrastructure.Extensions
         {
             services.AddScoped<ICommentsDbContext, CommentsDbContext>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            
             return services;
         }
     }
