@@ -2,6 +2,7 @@ export class CommentModel{
   id!: string;
   userName!: string;
   text!: string;
+  hasAttachment!: boolean;
   createdAt!: Date;
   parentCommentId!: string;
   replies!: CommentModel[];

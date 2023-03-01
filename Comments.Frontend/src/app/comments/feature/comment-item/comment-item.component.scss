@@ -49,6 +49,17 @@
       }
     }
   }
+
+  &__attachment{
+    padding: 1rem 0;
+
+    &-btn{
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      font-size: $font-size-default;
+    }
+  }
 }
 
 .reply-container{

@@ -20,10 +20,18 @@
     <p class="comment-container__body-text" [innerHTML]="comment.text"></p>
   </div>
 
-  <div class="comment-container__attachment">
-    <img
+  <div
+    *ngIf="comment.hasAttachment"
+    class="comment-container__attachment"
+  >
+    <button
+      class="comment-container__attachment-btn"
+    >
+      Show attachment
+    </button>
+    <!-- <img
       src="https://gamestorestorage.blob.core.windows.net/comments/{{comment.id}}"
-      onerror="src=''">
+      onerror="src=''"> -->
   </div>
 
   <div class="comment-container__actions">
