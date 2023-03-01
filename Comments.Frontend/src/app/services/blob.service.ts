@@ -12,4 +12,10 @@ export class BlobService {
   uploadBlob(containerName: string, blobName: string, formData: FormData){
     return this.http.post(environment.apiUrl + `blobs/${containerName}/${blobName}`, formData);
   }
+
+  getBlob(containerName: string, blobName: string){
+    return this.http.get(environment.apiUrl + `blobs/${containerName}/${blobName}`,{
+      responseType: 'blob'
+    });
+  }
 }

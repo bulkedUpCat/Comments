@@ -30,6 +30,10 @@ export class CommentService {
     return this.http.post<CommentModel>(environment.apiUrl + 'comments', model);
   }
 
+  uploadAttachment(id: string, file: FormData){
+    return this.http.post(environment.apiUrl + 'comments/' + id + '/attachment', file);
+  }
+
   updateComment(model: UpdateCommentModel){
     return this.http.put(environment.apiUrl + 'comments', model);
   }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../data-access/auth.service';
 
 @Component({
   selector: 'signup',
@@ -8,8 +10,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
+  urlPattern: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+  submitted: boolean = false;
+  passwordMismatch: boolean = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -19,13 +27,46 @@ export class SignupComponent implements OnInit {
     this.signupForm = this.fb.group({
       userName: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
-      homePage: [null, []],
+      homePage: [null, [Validators.pattern(this.urlPattern)]],
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]]
     })
   }
 
+  get userName(){
+    return this.signupForm.get('userName');
+  }
+
+  get email(){
+    return this.signupForm.get('email');
+  }
+
+  get homePage(){
+    return this.signupForm.get('homePage');
+  }
+
+  get password(){
+    return this.signupForm.get('password');
+  }
+
+  get confirmPassword(){
+    return this.signupForm.get('confirmPassword');
+  }
+
   onSubmit(){
-    console.log('submit');
+    this.submitted = true;
+
+    if (this.confirmPassword != this.password){
+      this.passwordMismatch = true;
+      return;
+    }
+
+    if (!this.signupForm.valid){
+      return;
+    }
+
+    this.authService.signup(this.signupForm.value).subscribe(u => {
+      this.router.navigateByUrl('/auth/login');
+    })
   }
 }

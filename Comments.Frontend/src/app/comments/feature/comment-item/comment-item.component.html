@@ -17,12 +17,10 @@
   >
     <button
       class="comment-container__attachment-btn"
+      (click)="onShowAttachment()"
     >
-      Show attachment
+      Download attachment
     </button>
-    <!-- <img
-      src="https://gamestorestorage.blob.core.windows.net/comments/{{comment.id}}"
-      onerror="src=''"> -->
   </div>
 
   <div class="comment-container__actions">
@@ -41,7 +39,7 @@
       Edit
     </button>
     <button
-      *ngIf="canDelete && isAuthenticated"
+      *ngIf="canDelete && isAuthenticated && comment.replies.length == 0"
       class="comment-container__actions-action"
       (click)="onDeleteComment(comment.id)"
     >

@@ -16,6 +16,7 @@
 
   &__userName,
   &__email,
+  &__homePage,
   &__password{
     font-size: $font-size-default;
     padding: 1rem;
@@ -28,5 +29,10 @@
     width: 50%;
     cursor: pointer;
     margin-top: 2rem;
+  }
+
+  &__error{
+    color: $color-red;
+    margin-bottom: 1rem;
   }
 }

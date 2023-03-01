@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/auth/data-access/auth.service';
 import { CommentModel, CommentSubmitModel, CreateCommentModel, CurrentComment, CurrentCommentType, UpdateCommentModel } from 'src/app/models/comment';
+import { BlobService } from 'src/app/services/blob.service';
 import { CommentService } from '../../data-access/comment.service';
 
 @Component({
@@ -30,7 +31,8 @@ export class CommentItemComponent implements OnInit {
 
   constructor(
     private commentService: CommentService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private blobService: BlobService) { }
 
   ngOnInit(): void {
     this.authService.isAuthenticated.subscribe(a => {
@@ -86,5 +88,13 @@ export class CommentItemComponent implements OnInit {
 
     return this.currentComment.id == this.comment.id &&
       this.currentComment.type == this.currentCommentType.edit;
+  }
+
+  onShowAttachment(){
+    this.blobService.getBlob('comments', this.comment.id).subscribe(f => {
+      console.log(f);
+      const fileURL = URL.createObjectURL(f);
+      window.location.assign(fileURL);
+    })
   }
 }

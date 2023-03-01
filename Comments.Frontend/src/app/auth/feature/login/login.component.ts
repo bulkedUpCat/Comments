@@ -11,6 +11,7 @@ import { AuthService } from '../../data-access/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  submitted: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -28,7 +29,17 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  get email(){
+    return this.loginForm.get('email');
+  }
+
+  get password(){
+    return this.loginForm.get('password');
+  }
+
   onSubmit(){
+    this.submitted = true;
+
     if (this.loginForm.invalid){
       return;
     }

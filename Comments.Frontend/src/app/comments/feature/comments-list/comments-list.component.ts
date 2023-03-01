@@ -67,6 +67,10 @@ export class CommentsListComponent implements OnInit {
   }
 
   onUpdateComment(model: UpdateCommentModel){
+    if (model.formData){
+      this.uploadFile(model.id, model.formData);
+    }
+
     this.commentService.updateComment(model).subscribe(c => {
       this.getAllComments();
       this.currentComment = null;
@@ -94,7 +98,9 @@ export class CommentsListComponent implements OnInit {
       return;
     }
 
-    this.blobService.uploadBlob('comments', id, formData).subscribe(_ => {});
+    this.commentService.uploadAttachment(id, formData).subscribe(_ => {
+      this.getAllComments();
+    });
   }
 
   onSort(){

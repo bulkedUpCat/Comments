@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using Comments.Application.Comments.Commands.CreateComment;
 using Comments.Application.Comments.Commands.DeleteComment;
 using Comments.Application.Comments.Commands.UpdateComment;
+using Comments.Application.Comments.Commands.UploadAttachment;
 using Comments.Application.Comments.Queries.GetAllComments;
 using Comments.Application.Comments.Queries.GetAllReplies;
 using Comments.Application.Comments.Queries.GetCommentById;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Comments.API.Controllers
@@ -53,6 +55,17 @@ namespace Comments.API.Controllers
         {
             var comment = await _mediator.Send(command, cancellationToken);
             return CreatedAtAction(nameof(GetById), new { id = comment.Id }, comment);
+        }
+        
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("{id}/attachment")]
+        public async Task<IActionResult> UploadAttachment(
+            Guid id,
+            [FromForm(Name = "file")] IFormFile file,
+            CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new UploadAttachmentCommand { Id = id, File = file }, cancellationToken);
+            return NoContent();
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

@@ -12,7 +12,7 @@ namespace Comments.Infrastructure.Data.Configurations
                 .Property(c => c.Text)
                 .HasMaxLength(10000)
                 .IsRequired();
-            
+
             builder
                 .HasMany(c => c.Replies)
                 .WithOne(c => c.ParentComment);

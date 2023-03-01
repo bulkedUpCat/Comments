@@ -16,6 +16,22 @@
     formControlName="email"
   >
 
+  <div
+    class="login-container__error"
+    *ngIf="submitted && email!.errors"
+  >
+    <div
+      *ngIf="email!.errors['required']"
+    >
+      This field is required
+    </div>
+    <div
+      *ngIf="email!.errors['email']"
+    >
+      Must be a valid email
+    </div>
+  </div>
+
   <label
     for="password"
     class="login-container__label"
@@ -29,10 +45,20 @@
     formControlName="password"
   >
 
+  <div
+    class="login-container__error"
+    *ngIf="submitted && password!.errors"
+  >
+    <div
+      *ngIf="password!.errors['required']"
+    >
+      This field is required
+    </div>
+  </div>
+
   <button
     class="login-container__submit-btn"
     type="submit"
-    [disabled]="loginForm.invalid"
   >
     Login
   </button>
