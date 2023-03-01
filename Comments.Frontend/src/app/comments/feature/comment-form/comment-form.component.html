@@ -9,6 +9,7 @@
     [modules]="editorConfig"
     (onContentChanged)="onEditorContentChange($event)"
     [placeholder]="'Type here...'"
+    [(ngModel)]="defaultText"
   >
   </quill-editor>
 

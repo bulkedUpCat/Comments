@@ -43,10 +43,20 @@
     <button
       *ngIf="canDelete && isAuthenticated"
       class="comment-container__actions-action"
+      (click)="onDeleteComment(comment.id)"
     >
       Delete
     </button>
   </div>
+
+  <comment-form
+    *ngIf="isEdit()"
+    [hasCancelButton]="true"
+    [defaultText]="comment.text"
+    (handleSubmit)="onUpdateComment($event.text, $event.formData, comment.id)"
+    (handleCancel)="onCancelComment()"
+  >
+  </comment-form>
 
   <comment-form
     *ngIf="isReply()"
@@ -63,6 +73,8 @@
       [currentComment]="currentComment"
       (setCurrentComment)="onSetCurrentComment($event)"
       (addComment)="addComment.emit($event)"
+      (updateComment)="onUpdateComment($event.text, $event.formData, reply.id)"
+      (deleteComment)="onDeleteComment(reply.id)"
     >
     </comment-item>
   </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CommentModel, CreateCommentModel, GetCommentsModel, PagedCommentList } from 'src/app/models/comment';
+import { CommentModel, CreateCommentModel, GetCommentsModel, PagedCommentList, UpdateCommentModel } from 'src/app/models/comment';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -28,5 +28,13 @@ export class CommentService {
 
   createComment(model: CreateCommentModel): Observable<CommentModel>{
     return this.http.post<CommentModel>(environment.apiUrl + 'comments', model);
+  }
+
+  updateComment(model: UpdateCommentModel){
+    return this.http.put(environment.apiUrl + 'comments', model);
+  }
+
+  deleteComment(id: string){
+    return this.http.delete(environment.apiUrl + 'comments/' + id);
   }
 }

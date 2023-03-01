@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/data-access/auth.service';
-import { CommentModel, CreateCommentModel, CurrentComment, GetCommentsModel } from 'src/app/models/comment';
+import { CommentModel, CreateCommentModel, CurrentComment, GetCommentsModel, UpdateCommentModel } from 'src/app/models/comment';
 import { BlobService } from 'src/app/services/blob.service';
 import { CommentService } from '../../data-access/comment.service';
 
@@ -64,6 +64,20 @@ export class CommentsListComponent implements OnInit {
       this.getAllComments();
       this.currentComment = null;
     });
+  }
+
+  onUpdateComment(model: UpdateCommentModel){
+    this.commentService.updateComment(model).subscribe(c => {
+      this.getAllComments();
+      this.currentComment = null;
+    })
+  }
+
+  onDeleteComment(id: string){
+    this.commentService.deleteComment(id).subscribe(c => {
+      this.getAllComments();
+      this.currentComment = null;
+    })
   }
 
   onSetCurrentComment(currentComment: CurrentComment | null){

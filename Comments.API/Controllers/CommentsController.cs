@@ -2,6 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Comments.Application.Comments.Commands.CreateComment;
+using Comments.Application.Comments.Commands.DeleteComment;
+using Comments.Application.Comments.Commands.UpdateComment;
 using Comments.Application.Comments.Queries.GetAllComments;
 using Comments.Application.Comments.Queries.GetAllReplies;
 using Comments.Application.Comments.Queries.GetCommentById;
@@ -51,6 +53,26 @@ namespace Comments.API.Controllers
         {
             var comment = await _mediator.Send(command, cancellationToken);
             return CreatedAtAction(nameof(GetById), new { id = comment.Id }, comment);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut]
+        public async Task<IActionResult> Put(
+            UpdateCommentCommand command,
+            CancellationToken cancellationToken)
+        {
+            await _mediator.Send(command, cancellationToken);
+            return NoContent();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(
+            Guid id,
+            CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new DeleteCommentCommand { Id = id }, cancellationToken);
+            return NoContent();
         }
     }
 }

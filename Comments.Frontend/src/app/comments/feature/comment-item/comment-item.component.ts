@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/auth/data-access/auth.service';
-import { CommentModel, CreateCommentModel, CurrentComment, CurrentCommentType } from 'src/app/models/comment';
+import { CommentModel, CommentSubmitModel, CreateCommentModel, CurrentComment, CurrentCommentType, UpdateCommentModel } from 'src/app/models/comment';
 import { CommentService } from '../../data-access/comment.service';
 
 @Component({
@@ -15,6 +15,8 @@ export class CommentItemComponent implements OnInit {
 
   @Output() setCurrentComment: EventEmitter<CurrentComment | null> = new EventEmitter<CurrentComment | null>();
   @Output() addComment: EventEmitter<CreateCommentModel> = new EventEmitter<CreateCommentModel>();
+  @Output() updateComment: EventEmitter<UpdateCommentModel> = new EventEmitter<UpdateCommentModel>();
+  @Output() deleteComment: EventEmitter<string> = new EventEmitter<string>();
 
   canReply: boolean = true;
   canEdit: boolean = true;
@@ -50,6 +52,19 @@ export class CommentItemComponent implements OnInit {
     this.addComment.emit({text: event, parentCommentId: this.comment.id, formData: formData});
   }
 
+  onUpdateComment(text: string, formData: FormData | null, id: string){
+    const updateModel = new UpdateCommentModel();
+    updateModel.id = id;
+    updateModel.text = text;
+    updateModel.formData = formData;
+
+    this.updateComment.emit(updateModel);
+  }
+
+  onDeleteComment(id: string){
+    this.deleteComment.emit(id);
+  }
+
   onCancelComment(){
     console.log('here');
     this.setCurrentComment.emit(null);
@@ -62,5 +77,14 @@ export class CommentItemComponent implements OnInit {
 
     return this.currentComment.id == this.comment.id &&
       this.currentComment.type == this.currentCommentType.reply;
+  }
+
+  isEdit(){
+    if (!this.currentComment){
+      return false;
+    }
+
+    return this.currentComment.id == this.comment.id &&
+      this.currentComment.type == this.currentCommentType.edit;
   }
 }

@@ -14,6 +14,12 @@ export class CreateCommentModel{
   formData!: FormData | null;
 }
 
+export class UpdateCommentModel{
+  id!: string;
+  text!: string;
+  formData!: FormData | null;
+}
+
 export class CommentSubmitModel{
   text!: string;
   formData!: FormData | null;

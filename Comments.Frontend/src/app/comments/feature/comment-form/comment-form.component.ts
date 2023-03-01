@@ -21,6 +21,7 @@ export class CommentFormComponent implements OnInit {
   errorMessage: string = '';
 
   @Input() hasCancelButton: boolean = false;
+  @Input() defaultText: string = '';
   @Output() handleSubmit: EventEmitter<CommentSubmitModel> = new EventEmitter<CommentSubmitModel>();
   @Output() handleCancel: EventEmitter<void> = new EventEmitter<void>();
 
