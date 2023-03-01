@@ -28,7 +28,6 @@ namespace Comments.Infrastructure.Data
         public async Task<IEnumerable<Comment>> GetAllByParentIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _context.Comments
-                .Include(c => c.ParentComment)
                 .Where(c => c.ParentComment.Id == id)
                 .ToListAsync(cancellationToken);
         }
@@ -36,7 +35,6 @@ namespace Comments.Infrastructure.Data
         public async Task<Comment?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _context.Comments
-                .Include(c => c.Replies)
                 .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
         }
 

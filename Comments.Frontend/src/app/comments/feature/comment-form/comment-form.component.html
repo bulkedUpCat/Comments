@@ -12,6 +12,21 @@
   >
   </quill-editor>
 
+  <div class="form-container__file-input">
+    <input
+      type="file"
+      #fileInput
+      accept="image/jpeg, image/gif, image/png, .txt"
+      (change)="onAttachFile(fileInput.files)">
+  </div>
+
+  <div
+    *ngIf="error"
+    class="form-container__errors"
+  >
+    <p>{{errorMessage}}</p>
+  </div>
+
   <re-captcha
     class="form-container__captcha"
     (resolved)="resolved($event)"
@@ -23,13 +38,17 @@
       class="form-container__submit-btn"
       type="submit"
       [disabled]="!captcha"
-    >Submit</button>
+    >
+      Submit
+    </button>
     <button
       *ngIf="hasCancelButton"
       class="form-container__cancel-btn"
       type="button"
       (click)="onCancel()"
-    >Cancel</button>
+    >
+      Cancel
+    </button>
   </div>
 
 </form>

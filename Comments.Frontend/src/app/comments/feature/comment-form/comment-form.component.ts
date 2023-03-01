@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { CreateCommentModel } from 'src/app/models/comment';
 
 @Component({
   selector: 'comment-form',
@@ -15,6 +14,9 @@ export class CommentFormComponent implements OnInit {
     ]
   };
   captcha: string = '';
+  formData: FormData = new FormData();
+  error: boolean = false;
+  errorMessage: string = '';
 
   @Input() hasCancelButton: boolean = false;
   @Output() handleSubmit: EventEmitter<string> = new EventEmitter<string>();
@@ -52,5 +54,19 @@ export class CommentFormComponent implements OnInit {
   resolved(captchaResponse: string){
     this.captcha = captchaResponse;
     console.log(this.captcha);
+  }
+
+  onAttachFile(files: any){
+    console.log(files[0]);
+    if (files[0]){
+
+      if (files[0].size > 100000 && files[0].type == 'text/plain'){
+        this.error = true;
+        this.errorMessage = 'The file is too big';
+        return;
+      }
+
+      this.formData.append('file', files[0]);
+    }
   }
 }

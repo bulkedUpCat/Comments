@@ -17,7 +17,7 @@
   </div>
 
   <div class="comment-container__body">
-    <p class="comment-container__body-text">{{comment.text}}</p>
+    <p class="comment-container__body-text" [innerHTML]="comment.text"></p>
   </div>
 
   <div class="comment-container__actions">

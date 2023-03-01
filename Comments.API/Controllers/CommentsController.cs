@@ -6,6 +6,8 @@ using Comments.Application.Comments.Queries.GetAllComments;
 using Comments.Application.Comments.Queries.GetAllReplies;
 using Comments.Application.Comments.Queries.GetCommentById;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Comments.API.Controllers
@@ -39,6 +41,7 @@ namespace Comments.API.Controllers
             return Ok(await _mediator.Send(new GetCommentByIdQuery { Id = id }, cancellationToken));
         }
         
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> Create(
             CreateCommentCommand command, 

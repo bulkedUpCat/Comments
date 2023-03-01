@@ -13,21 +13,34 @@ namespace Comments.Application.Comments.Commands.CreateComment
     {
         private readonly ICommentsDbContext _context;
         private readonly ICommentRepository _commentRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly ICurrentUserService _currentUserService;
         private readonly IMapper _mapper;
 
         public CreateCommentCommandHandler(
             ICommentsDbContext context, 
             ICommentRepository commentRepository,
+            IUserRepository userRepository,
+            ICurrentUserService currentUserService,
             IMapper mapper)
         {
             _context = context;
             _commentRepository = commentRepository;
+            _userRepository = userRepository;
+            _currentUserService = currentUserService;
             _mapper = mapper;
         }
 
         public async Task<CommentModel> Handle(CreateCommentCommand request, CancellationToken cancellationToken)
         {
+            var userId = _currentUserService.GetCurrentUserId();
+
+            var user = await _userRepository.GetByIdAsync(userId, cancellationToken)
+                       ?? throw new UserNotFoundException(userId);
+            
             var comment = _mapper.Map<Comment>(request);
+
+            comment.User = user;
 
             if (request.ParentCommentId != null)
             {

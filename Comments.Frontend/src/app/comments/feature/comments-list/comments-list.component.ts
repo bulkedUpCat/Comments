@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/data-access/auth.service';
 import { CommentModel, CreateCommentModel, CurrentComment } from 'src/app/models/comment';
 import { CommentService } from '../../data-access/comment.service';
 
@@ -10,8 +11,11 @@ import { CommentService } from '../../data-access/comment.service';
 export class CommentsListComponent implements OnInit {
   comments: CommentModel[] = [];
   currentComment!: CurrentComment | null;
+  userId: string | null = null;
 
-  constructor(private commentService: CommentService) { }
+  constructor(
+    private commentService: CommentService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getAllComments();
@@ -26,10 +30,18 @@ export class CommentsListComponent implements OnInit {
 
   onAddComment(model: CreateCommentModel){
     console.log(model.text, model.parentCommentId);
+    this.commentService.createComment(model).subscribe(c => {
+      this.getAllComments();
+      this.currentComment = null;
+    });
   }
 
   onSetCurrentComment(currentComment: CurrentComment | null){
     console.log(currentComment);
     this.currentComment = currentComment;
+  }
+
+  getCurrentUserId(){
+    this.userId = this.authService.getCurrentUserId();
   }
 }

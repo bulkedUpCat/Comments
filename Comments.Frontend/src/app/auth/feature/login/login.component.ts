@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/auth';
 import { AuthService } from '../../data-access/auth.service';
 
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -33,7 +35,7 @@ export class LoginComponent implements OnInit {
 
     const loginModel: LoginModel = this.loginForm.value;
     this.authService.login(loginModel).subscribe(l => {
-      console.log(l);
-    })
+      this.router.navigateByUrl('/comments');
+    });
   }
 }
