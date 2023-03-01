@@ -42,6 +42,7 @@ namespace Comments.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors();
+            app.UseExceptionHandlingMiddleware();
             
             if (env.IsDevelopment())
             {
