@@ -37,6 +37,7 @@ namespace Comments.API
             services.ConfigureAuthentication(Configuration);
             services.ConfigureHttpContextAccessor();
             services.ConfigureAzureBlobStorage(Configuration);
+            services.ConfigureFluentValidation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

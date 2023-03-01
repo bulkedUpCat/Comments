@@ -1,9 +1,14 @@
-﻿using Azure.Storage.Blobs;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using Azure.Storage.Blobs;
+using Comments.Application.Comments.Commands.CreateComment;
 using Comments.Application.Common.Interfaces;
 using Comments.Infrastructure.Auth.Interfaces;
 using Comments.Infrastructure.Auth.Services;
 using Comments.Infrastructure.Data;
 using Comments.Infrastructure.Services;
+using Comments.Infrastructure.Validators;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,6 +52,15 @@ namespace Comments.Infrastructure.Extensions
             services.AddScoped(_ => new BlobServiceClient(configuration.GetConnectionString("AzureBlobStorage")));
             services.AddScoped<IStorageService, AzureBlobStorageService>();
             
+            return services;
+        }
+        
+        public static IServiceCollection ConfigureFluentValidation(this IServiceCollection services)
+        {
+            services.AddFluentValidation(fv =>
+                fv.RegisterValidatorsFromAssemblies(
+                    new List<Assembly>{typeof(LoginModelValidator).Assembly, typeof(CreateCommentCommandValidator).Assembly}));
+
             return services;
         }
     }
