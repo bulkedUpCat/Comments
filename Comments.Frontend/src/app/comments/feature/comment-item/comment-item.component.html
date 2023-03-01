@@ -4,16 +4,7 @@
       <use xlink:href="../../assets/svg/sprite.svg#user"></use>
     </svg>
     <p class="comment-container__heading-user-name">{{comment.userName}}</p>
-    <p class="comment-container__heading-date">{{comment.createdAt | date: 'dd.MM.YY'}}</p>
-    <div class="comment-container__heading-sorting">
-      <svg class="comment-container__heading-sorting-image">
-        <use xlink:href="../../assets/svg/sprite.svg#arrow-up"></use>
-      </svg>
-      <p>0</p>
-      <svg class="comment-container__heading-sorting-image">
-        <use xlink:href="../../assets/svg/sprite.svg#arrow-down"></use>
-      </svg>
-    </div>
+    <p class="comment-container__heading-date">{{comment.createdAt | date: 'dd.MM.YY'}} at {{comment.createdAt | date: 'hh:mm a'}}</p>
   </div>
 
   <div class="comment-container__body">
@@ -36,21 +27,21 @@
 
   <div class="comment-container__actions">
     <button
-      *ngIf="canReply"
+      *ngIf="canReply && isAuthenticated"
       class="comment-container__actions-action"
       (click)="onSetCurrentComment({id: comment.id, type: currentCommentType.reply})"
     >
       Reply
     </button>
     <button
-      *ngIf="canEdit"
+      *ngIf="canEdit && isAuthenticated"
       class="comment-container__actions-action"
       (click)="onSetCurrentComment({id: comment.id, type: currentCommentType.edit})"
     >
       Edit
     </button>
     <button
-      *ngIf="canDelete"
+      *ngIf="canDelete && isAuthenticated"
       class="comment-container__actions-action"
     >
       Delete

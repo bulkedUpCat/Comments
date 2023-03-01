@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CommentModel, CreateCommentModel } from 'src/app/models/comment';
+import { CommentModel, CreateCommentModel, GetCommentsModel, PagedCommentList } from 'src/app/models/comment';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,8 +11,15 @@ export class CommentService {
 
   constructor(private http: HttpClient) { }
 
-  getAllComments(): Observable<CommentModel[]>{
-    return this.http.get<CommentModel[]>(environment.apiUrl + 'comments');
+  getAllComments(model: GetCommentsModel): Observable<PagedCommentList>{
+    var queryParams: any = [];
+
+    if (model.sort) queryParams['sort'] = model.sort;
+    if (model.sortOrder) queryParams['sortOrder'] = model.sortOrder;
+
+    return this.http.get<PagedCommentList>(environment.apiUrl + 'comments', {
+      params: queryParams
+    });
   }
 
   getAllReplies(parentCommentId: string): Observable<CommentModel[]>{

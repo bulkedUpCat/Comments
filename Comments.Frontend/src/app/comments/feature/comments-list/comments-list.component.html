@@ -1,8 +1,34 @@
 <div class="comments-container">
   <comment-form
+    *ngIf="isAuthenticated"
     [hasCancelButton]="false"
     (handleSubmit)="onAddComment({text: $event.text, parentCommentId: undefined, formData: $event.formData})"
   ></comment-form>
+
+  <div class="comments-container__sorting">
+    <p>Sort comments</p>
+    <div class="comments-container__sorting">
+      <select (change)="onSort()" [(ngModel)]="sortingValue">
+        <option
+          *ngFor="let opt of sortingOptions"
+          [value]="opt"
+        >
+          {{opt}}
+        </option>
+      </select>
+      <select (change)="onChangeSortingOrder()" [(ngModel)]="sortingOrder">
+        <option
+          *ngFor="let opt of sortingOrderOptions"
+          [value]="opt"
+        >
+          {{opt}}
+        </option>
+      </select>
+    </div>
+
+
+  </div>
+
   <div
     class="comments-container__item"
     *ngFor="let comment of comments"

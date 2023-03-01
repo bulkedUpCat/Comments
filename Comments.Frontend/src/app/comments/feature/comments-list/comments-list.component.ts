@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/data-access/auth.service';
-import { CommentModel, CreateCommentModel, CurrentComment } from 'src/app/models/comment';
+import { CommentModel, CreateCommentModel, CurrentComment, GetCommentsModel } from 'src/app/models/comment';
 import { BlobService } from 'src/app/services/blob.service';
 import { CommentService } from '../../data-access/comment.service';
 
@@ -14,19 +15,44 @@ export class CommentsListComponent implements OnInit {
   comments: CommentModel[] = [];
   currentComment!: CurrentComment | null;
   userId: string | null = null;
+  sortingOptions: string[] = ['None', 'User Name', 'Email', 'Date'];
+  sortingOrderOptions: string[] = ['ASC', 'DESC'];
+  sortingValue: string = 'None';
+  sortingOrder: string = 'DESC';
+  getCommentsModel: GetCommentsModel = new GetCommentsModel();
+  isAuthenticated: boolean = false;
 
   constructor(
     private commentService: CommentService,
     private authService: AuthService,
-    private blobService: BlobService) { }
+    private blobService: BlobService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getAllComments();
+    this.updateFilterModel();
+
+    this.route.queryParams.subscribe(q => {
+      this.sortingValue = q['sort'] ?? 'None';
+      this.sortingOrder = q['sortOrder'] ?? 'DESC';
+    })
+
+    this.authService.isAuthenticated.subscribe(a => {
+      this.isAuthenticated = a;
+    })
+  }
+
+  updateFilterModel(){
+    this.route.queryParams.subscribe(q => {
+      this.getCommentsModel.sort = q['sort'];
+      this.getCommentsModel.sortOrder = q['sortOrder'];
+      this.getAllComments();
+    })
   }
 
   getAllComments(){
-    this.commentService.getAllComments().subscribe(c => {
-      this.comments = c;
+    this.commentService.getAllComments(this.getCommentsModel).subscribe(c => {
+      this.comments = c.data;
       console.log(this.comments);
     })
   }
@@ -55,5 +81,23 @@ export class CommentsListComponent implements OnInit {
     }
 
     this.blobService.uploadBlob('comments', id, formData).subscribe(_ => {});
+  }
+
+  onSort(){
+    this.router.navigate([], {
+      queryParams:{
+        sort: this.sortingValue
+      },
+      queryParamsHandling: 'merge'
+    })
+  }
+
+  onChangeSortingOrder(){
+    this.router.navigate([], {
+      queryParams: {
+        sortOrder: this.sortingOrder
+      },
+      queryParamsHandling: 'merge'
+    })
   }
 }

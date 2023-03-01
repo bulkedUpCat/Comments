@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/auth/data-access/auth.service';
 import { CommentModel, CreateCommentModel, CurrentComment, CurrentCommentType } from 'src/app/models/comment';
 import { CommentService } from '../../data-access/comment.service';
 
@@ -23,11 +24,16 @@ export class CommentItemComponent implements OnInit {
 
   replies: CommentModel[] = [];
 
+  isAuthenticated: boolean = false;
+
   constructor(
     private commentService: CommentService,
-    private http: HttpClient) { }
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.isAuthenticated.subscribe(a => {
+      this.isAuthenticated = a;
+    })
   }
 
   onGetReplies(){

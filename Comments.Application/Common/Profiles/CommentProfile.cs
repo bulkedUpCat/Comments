@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Comments.Application.Comments.Commands.CreateComment;
+using Comments.Application.Comments.Queries.GetAllComments;
 using Comments.Application.Models.Comment;
 using Comments.Domain.Entities;
 
@@ -15,6 +16,8 @@ namespace Comments.Application.Common.Profiles
                 .ForMember(dest => dest.UserName, src => src.MapFrom(opt => opt.User.UserName));
                 
             CreateMap<CreateCommentCommand, Comment>();
+
+            CreateMap<GetAllCommentsQuery, CommentFilterModel>();
         }
     }
 }

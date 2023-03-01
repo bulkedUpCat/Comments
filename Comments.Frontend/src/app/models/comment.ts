@@ -28,3 +28,16 @@ export enum CurrentCommentType{
   reply,
   edit
 }
+
+export class PagedCommentList{
+  data!: CommentModel[];
+  page!: number;
+  pageCount!: number;
+}
+
+export class GetCommentsModel{
+  sort!: string;
+  sortOrder!: string;
+  page!: number;
+  pageCount!: number;
+}

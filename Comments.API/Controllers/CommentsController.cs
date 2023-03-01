@@ -24,9 +24,11 @@ namespace Comments.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAll(
+            [FromQuery]GetAllCommentsQuery query,
+            CancellationToken cancellationToken)
         {
-            return Ok(await _mediator.Send(new GetAllCommentsQuery(), cancellationToken));
+            return Ok(await _mediator.Send(query, cancellationToken));
         }
 
         [HttpGet("{id:guid}/replies")]

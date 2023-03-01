@@ -1,0 +1,26 @@
+@import 'variables';
+
+.header{
+  display: flex;
+  font-size: $font-size-default;
+  justify-content: space-between;
+  padding: 3rem;
+
+  &__auth{
+    display: flex;
+  }
+
+  &__link{
+    text-decoration: none;
+    color: $color-black;
+    cursor: pointer;
+
+    &:not(:last-child){
+      margin-right: 1rem;
+    }
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}

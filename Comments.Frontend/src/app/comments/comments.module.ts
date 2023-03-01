@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CommentItemComponent } from './feature/comment-item/comment-item.component';
 import { CommentsListComponent } from './feature/comments-list/comments-list.component';
 import { CommentFormComponent } from './feature/comment-form/comment-form.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { RecaptchaModule } from 'ng-recaptcha';
 
@@ -17,7 +17,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
     CommonModule,
     ReactiveFormsModule,
     QuillModule,
-    RecaptchaModule
+    RecaptchaModule,
+    FormsModule
   ]
 })
 export class CommentsModule { }

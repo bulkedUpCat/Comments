@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Comments.Application.Common.Interfaces;
+using Comments.Application.Models.Comment;
 using Comments.Domain.Entities;
+using Comments.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Comments.Infrastructure.Data
@@ -18,11 +20,13 @@ namespace Comments.Infrastructure.Data
             _context = context;
         }
         
-        public async Task<IEnumerable<Comment>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Comment>> GetAllAsync(
+            CommentFilterModel model,
+            CancellationToken cancellationToken)
         {
             return await _context.Comments
                 .Where(c => c.ParentComment == null)
-                .OrderByDescending(c => c.CreatedAt)
+                .Sort(model.Sort, model.SortOrder)
                 .ToListAsync(cancellationToken);
         }
 
