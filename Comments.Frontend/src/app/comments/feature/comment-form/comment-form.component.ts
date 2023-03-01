@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { CommentSubmitModel } from 'src/app/models/comment';
+import { BlobService } from 'src/app/services/blob.service';
 
 @Component({
   selector: 'comment-form',
@@ -19,10 +21,11 @@ export class CommentFormComponent implements OnInit {
   errorMessage: string = '';
 
   @Input() hasCancelButton: boolean = false;
-  @Output() handleSubmit: EventEmitter<string> = new EventEmitter<string>();
+  @Output() handleSubmit: EventEmitter<CommentSubmitModel> = new EventEmitter<CommentSubmitModel>();
   @Output() handleCancel: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private fb: UntypedFormBuilder) { }
+  constructor(
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -35,7 +38,7 @@ export class CommentFormComponent implements OnInit {
   }
 
   onSubmit(): void{
-    this.handleSubmit.emit(this.commentForm.value.text);
+    this.handleSubmit.emit({text: this.commentForm.value.text, formData: this.formData});
     this.commentForm.reset();
   }
 

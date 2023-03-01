@@ -1,7 +1,7 @@
 <div class="comments-container">
   <comment-form
     [hasCancelButton]="false"
-    (handleSubmit)="onAddComment({text: $event, parentCommentId: undefined})"
+    (handleSubmit)="onAddComment({text: $event.text, parentCommentId: undefined, formData: $event.formData})"
   ></comment-form>
   <div
     class="comments-container__item"

@@ -20,6 +20,12 @@
     <p class="comment-container__body-text" [innerHTML]="comment.text"></p>
   </div>
 
+  <div class="comment-container__attachment">
+    <img
+      src="https://gamestorestorage.blob.core.windows.net/comments/{{comment.id}}"
+      onerror="src=''">
+  </div>
+
   <div class="comment-container__actions">
     <button
       *ngIf="canReply"
@@ -46,7 +52,7 @@
   <comment-form
     *ngIf="isReply()"
     [hasCancelButton]="true"
-    (handleSubmit)="onAddComment($event)"
+    (handleSubmit)="onAddComment($event.text, null)"
     (handleCancel)="onCancelComment()"
   >
   </comment-form>

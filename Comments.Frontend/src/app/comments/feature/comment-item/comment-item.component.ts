@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentModel, CreateCommentModel, CurrentComment, CurrentCommentType } from 'src/app/models/comment';
 import { CommentService } from '../../data-access/comment.service';
@@ -22,7 +23,9 @@ export class CommentItemComponent implements OnInit {
 
   replies: CommentModel[] = [];
 
-  constructor(private commentService: CommentService) { }
+  constructor(
+    private commentService: CommentService,
+    private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -37,8 +40,8 @@ export class CommentItemComponent implements OnInit {
     this.setCurrentComment.emit(comment);
   }
 
-  onAddComment(event: string){
-    this.addComment.emit({text: event, parentCommentId: this.comment.id});
+  onAddComment(event: string, formData: FormData | null){
+    this.addComment.emit({text: event, parentCommentId: this.comment.id, formData: formData});
   }
 
   onCancelComment(){

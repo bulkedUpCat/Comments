@@ -10,6 +10,12 @@ export class CommentModel{
 export class CreateCommentModel{
   text!: string;
   parentCommentId: string | undefined;
+  formData!: FormData | null;
+}
+
+export class CommentSubmitModel{
+  text!: string;
+  formData!: FormData | null;
 }
 
 export class CurrentComment{

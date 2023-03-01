@@ -22,6 +22,7 @@ namespace Comments.Infrastructure.Data
         {
             return await _context.Comments
                 .Where(c => c.ParentComment == null)
+                .OrderByDescending(c => c.CreatedAt)
                 .ToListAsync(cancellationToken);
         }
 
