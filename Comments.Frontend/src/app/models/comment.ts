@@ -37,8 +37,9 @@ export enum CurrentCommentType{
 
 export class PagedCommentList{
   data!: CommentModel[];
-  page!: number;
-  pageCount!: number;
+  currentPage!: number;
+  pageSize!: number;
+  totalPages!: number;
 }
 
 export class GetCommentsModel{

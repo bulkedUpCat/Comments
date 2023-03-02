@@ -26,7 +26,6 @@
       </select>
     </div>
 
-
   </div>
 
   <div
@@ -42,4 +41,11 @@
       (deleteComment)="onDeleteComment($event)"
     ></comment-item>
   </div>
+
+  <paging-wrapper
+    *ngIf="commentsLoaded"
+    [page]="pagedList.currentPage"
+    [pageSize]="pagedList.pageSize"
+    [totalPages]="pagedList.totalPages"
+  ></paging-wrapper>
 </div>

@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/data-access/auth.service';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HeaderComponent } from './components/header/header.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HeaderComponent } from './components/header/header.component';
     AuthModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, AuthService
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, AuthService,
   ],
   bootstrap: [AppComponent]
 })

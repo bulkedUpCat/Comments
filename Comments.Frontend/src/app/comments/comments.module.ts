@@ -6,12 +6,14 @@ import { CommentFormComponent } from './feature/comment-form/comment-form.compon
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { PagingWrapperComponent } from './utilities/paging-wrapper/paging-wrapper.component';
 
 @NgModule({
   declarations: [
     CommentsListComponent,
     CommentItemComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    PagingWrapperComponent
   ],
   imports: [
     CommonModule,

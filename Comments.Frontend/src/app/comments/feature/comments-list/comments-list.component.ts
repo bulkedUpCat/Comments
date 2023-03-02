@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/data-access/auth.service';
-import { CommentModel, CreateCommentModel, CurrentComment, GetCommentsModel, UpdateCommentModel } from 'src/app/models/comment';
+import { CommentModel, CreateCommentModel, CurrentComment, GetCommentsModel, PagedCommentList, UpdateCommentModel } from 'src/app/models/comment';
 import { BlobService } from 'src/app/services/blob.service';
 import { CommentService } from '../../data-access/comment.service';
 
@@ -13,6 +13,7 @@ import { CommentService } from '../../data-access/comment.service';
 })
 export class CommentsListComponent implements OnInit {
   comments: CommentModel[] = [];
+  pagedList!: PagedCommentList;
   currentComment!: CurrentComment | null;
   userId: string | null = null;
   sortingOptions: string[] = ['None', 'User Name', 'Email', 'Date'];
@@ -21,6 +22,7 @@ export class CommentsListComponent implements OnInit {
   sortingOrder: string = 'DESC';
   getCommentsModel: GetCommentsModel = new GetCommentsModel();
   isAuthenticated: boolean = false;
+  commentsLoaded: boolean = false;
 
   constructor(
     private commentService: CommentService,
@@ -46,14 +48,18 @@ export class CommentsListComponent implements OnInit {
     this.route.queryParams.subscribe(q => {
       this.getCommentsModel.sort = q['sort'];
       this.getCommentsModel.sortOrder = q['sortOrder'];
+      this.getCommentsModel.page = q['page'] ?? 1;
+      this.getCommentsModel.pageCount = q['pageSize'] ?? 5;
       this.getAllComments();
     })
   }
 
   getAllComments(){
     this.commentService.getAllComments(this.getCommentsModel).subscribe(c => {
+      this.pagedList = c;
       this.comments = c.data;
-      console.log(this.comments);
+      console.log(this.pagedList);
+      this.commentsLoaded = true;
     })
   }
 

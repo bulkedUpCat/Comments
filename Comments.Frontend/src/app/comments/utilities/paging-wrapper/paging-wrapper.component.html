@@ -1,0 +1,17 @@
+<div *ngIf="pageSize && page" class="paging-container">
+  <div class="paging-options">
+    <span
+      class="paging-arrow"
+      (click)="onPrevPage()"
+    >
+      <
+    </span>
+    <p class="paging-number">{{page}}</p>
+    <span
+      class="paging-arrow"
+      (click)="onNextPage()"
+    >
+      >
+    </span>
+  </div>
+</div>

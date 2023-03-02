@@ -10,12 +10,14 @@ namespace Comments.Application.Models.Shared
         public int CurrentPage { get; private set; }
         public int TotalPages { get; private set; }
         public int TotalCount { get; private set;  }
-
+        public int PageSize { get; set; }
+        
         public PagedList(IEnumerable<T> data, int totalCount, int currentPage, int pageSize)
         {
             Data = data;
             TotalCount = totalCount;
             CurrentPage = currentPage;
+            PageSize = pageSize;
 
             TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
         }

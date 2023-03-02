@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
 
-    if (this.confirmPassword != this.password){
+    if (this.confirmPassword?.value != this.password?.value){
       this.passwordMismatch = true;
       return;
     }

@@ -16,6 +16,10 @@ export class CommentService {
 
     if (model.sort) queryParams['sort'] = model.sort;
     if (model.sortOrder) queryParams['sortOrder'] = model.sortOrder;
+    if (model.page) queryParams['page'] = model.page;
+    if (model.pageCount) queryParams['pageCount'] = model.pageCount;
+
+    console.log(queryParams);
 
     return this.http.get<PagedCommentList>(environment.apiUrl + 'comments', {
       params: queryParams

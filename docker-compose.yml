@@ -1,0 +1,40 @@
+version: '3.7'
+
+networks:
+  localdev:
+    name: localdev
+
+services:
+  comments-frontend: 
+    container_name: 'comments-frontend'
+    build: './comments.frontend'
+    ports: 
+      - 100:80
+    networks:
+      - localdev
+
+  comments-api:
+    container_name: 'comments-api'
+    build: './'
+    ports:
+      - "7000:80"
+    depends_on:
+      - comments-db
+    networks:
+      - localdev
+
+  comments-db:
+    container_name: 'comments-db'
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    ports:
+      - "26000:1433"
+    volumes:
+      - "dbstorage:/var/opt/mssql"
+    environment:
+      MSSQL_SA_PASSWORD: S3cur3P@ssW0rd
+      ACCEPT_EULA: Y
+    networks:
+      - localdev
+
+volumes: 
+  dbstorage:
