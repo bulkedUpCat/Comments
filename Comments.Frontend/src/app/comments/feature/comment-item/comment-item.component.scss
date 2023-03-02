@@ -20,6 +20,7 @@
     &-user-name{
       font-weight: 600;
       margin-right: 1rem;
+      color: $color-blue;
     }
 
     &-sorting{
@@ -40,9 +41,11 @@
     justify-content: flex-end;
 
     &-action{
-      padding: .5rem;
+      padding: 1rem;
       font-size: $font-size-default;
       cursor: pointer;
+      border: none;
+      border-radius: 100px;
 
       &:not(:last-child){
         margin-right: 1rem;
@@ -64,4 +67,14 @@
 
 .reply-container{
   margin-left: 3rem;
+}
+
+.blue{
+  background-color: $color-blue;
+  color: $color-white;
+}
+
+.blue-dark{
+  background-color: $color-blue-dark;
+  color: $color-white;
 }

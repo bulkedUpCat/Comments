@@ -26,25 +26,25 @@
   <div class="comment-container__actions">
     <button
       *ngIf="canReply && isAuthenticated"
-      class="comment-container__actions-action"
+      class="comment-container__actions-action blue"
       (click)="onSetCurrentComment({id: comment.id, type: currentCommentType.reply})"
     >
       Reply
     </button>
     <button
       *ngIf="canEdit && isAuthenticated"
-      class="comment-container__actions-action"
+      class="comment-container__actions-action blue-dark"
       (click)="onSetCurrentComment({id: comment.id, type: currentCommentType.edit})"
     >
       Edit
     </button>
-    <button
+    <!-- <button
       *ngIf="canDelete && isAuthenticated && comment.replies.length == 0"
       class="comment-container__actions-action"
       (click)="onDeleteComment(comment.id)"
     >
       Delete
-    </button>
+    </button> -->
   </div>
 
   <comment-form

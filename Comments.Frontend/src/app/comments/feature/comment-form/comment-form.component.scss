@@ -26,9 +26,20 @@
     padding: 1rem;
     cursor: pointer;
     font-size: $font-size-default;
+    border-radius: 100px;
   }
 
   &__captcha{
     margin: 2rem;
   }
+}
+
+.orange{
+  background-color: $color-orange;
+  color: $color-white;
+}
+
+.red{
+  background-color: $color-red;
+  color: $color-white;
 }

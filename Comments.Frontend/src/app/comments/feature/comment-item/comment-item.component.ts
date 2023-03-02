@@ -35,7 +35,7 @@ export class CommentItemComponent implements OnInit {
     private blobService: BlobService) { }
 
   ngOnInit(): void {
-    this.canEdit = this.authService.getCurrentUserId() ==
+    this.canEdit = this.authService.getCurrentUserId() == this.comment.userId;
     this.authService.isAuthenticated.subscribe(a => {
       this.isAuthenticated = a;
     })

@@ -1,6 +1,7 @@
 export class CommentModel{
   id!: string;
   userName!: string;
+  userId!: string;
   text!: string;
   hasAttachment!: boolean;
   createdAt!: Date;
