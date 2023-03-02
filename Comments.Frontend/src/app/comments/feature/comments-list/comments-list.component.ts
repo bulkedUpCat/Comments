@@ -16,9 +16,9 @@ export class CommentsListComponent implements OnInit {
   pagedList!: PagedCommentList;
   currentComment!: CurrentComment | null;
   userId: string | null = null;
-  sortingOptions: string[] = ['None', 'User Name', 'Email', 'Date'];
+  sortingOptions: string[] = ['User Name', 'Email', 'Date'];
   sortingOrderOptions: string[] = ['ASC', 'DESC'];
-  sortingValue: string = 'None';
+  sortingValue: string = 'Email';
   sortingOrder: string = 'DESC';
   getCommentsModel: GetCommentsModel = new GetCommentsModel();
   isAuthenticated: boolean = false;
@@ -35,7 +35,7 @@ export class CommentsListComponent implements OnInit {
     this.updateFilterModel();
 
     this.route.queryParams.subscribe(q => {
-      this.sortingValue = q['sort'] ?? 'None';
+      this.sortingValue = q['sort'] ?? 'Email';
       this.sortingOrder = q['sortOrder'] ?? 'DESC';
     })
 

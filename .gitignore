@@ -352,3 +352,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
+Properties/
+.config
+*Backup.Infrastructure.csproj
