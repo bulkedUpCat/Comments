@@ -10,7 +10,7 @@ This applicaton allows users to view and create comments. In order to create a c
 - Clone the repository using the following command in the terminal: ``git clone https://github.com/bulkedUpCat/Comments.git``
 - Make sure you have Docker installed on your machine before proceeding.
 - Go to the same folder as docker-compose.yml file and run the following command in the terminal:
-  ``docker compose up --build``.
+  ``docker compose up --build`` (use admin rights).
   This process may take some time if you run it for the first time, since it will pull all required images.
 - Go to http://localhost:100.
 - Sign up using a link in the top right corner (or go to http://localhost:100/auth/signup).
