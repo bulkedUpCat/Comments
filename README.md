@@ -18,6 +18,8 @@ This applicaton allows users to view and create comments. In order to create a c
 - After that you'll be redirected to the comments page http://localhost:100/#/comments where you can view and add your own comments.
 - You can access API Swagger documentation on http://localhost:7000/swagger/index.html.
 
+If you see errors in the browser console and API is not responding, please stop/kill the containers and run ``docker compose up --build`` again
+
 ## Technologies used
 
 - ASP .NET API
