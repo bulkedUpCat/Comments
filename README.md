@@ -1,5 +1,7 @@
 # Comments application
 
+## The application is running on https://comments-angular-2023.azurewebsites.net/#/comments
+
 ## Summary
 
 This applicaton allows users to view and create comments. In order to create a comment users need to sign up or log in if they already have an account. Authorized users can also reply to other comments and edit theirs. It is possible to add an attachment to the comment. A valid attachment is a file of .png, .jpg, .gif or .txt (less than 100kb) extension. There is an opportunity to include html tags in comments (i, strong, code, a).
