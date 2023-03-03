@@ -27,3 +27,8 @@ If you see errors in the browser console and API is not responding, please stop/
 - SQL Server
 - Docker
 - Microsoft Azure
+
+## Database Diagram
+
+![image](https://user-images.githubusercontent.com/92333402/222607076-ce572c43-56ac-4c19-b429-1265150698ab.png)
+
