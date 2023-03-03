@@ -24,7 +24,7 @@ namespace Comments.API.Controllers
             CancellationToken cancellationToken)
         {
             var blob = await _storageService.GetBlobAsync(containerName, blobName, cancellationToken);
-            return blob != null ? File(blob.Content, blob.ContentType) : NoContent();
+            return Ok(blob);
         }
 
         [HttpPost("{containerName}/{blobName}")]

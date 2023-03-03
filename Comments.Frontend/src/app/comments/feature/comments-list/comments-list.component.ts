@@ -18,7 +18,7 @@ export class CommentsListComponent implements OnInit {
   userId: string | null = null;
   sortingOptions: string[] = ['User Name', 'Email', 'Date'];
   sortingOrderOptions: string[] = ['ASC', 'DESC'];
-  sortingValue: string = 'Email';
+  sortingValue: string = 'Date';
   sortingOrder: string = 'DESC';
   getCommentsModel: GetCommentsModel = new GetCommentsModel();
   isAuthenticated: boolean = false;
@@ -35,7 +35,7 @@ export class CommentsListComponent implements OnInit {
     this.updateFilterModel();
 
     this.route.queryParams.subscribe(q => {
-      this.sortingValue = q['sort'] ?? 'Email';
+      this.sortingValue = q['sort'] ?? 'Date';
       this.sortingOrder = q['sortOrder'] ?? 'DESC';
     })
 
@@ -49,7 +49,7 @@ export class CommentsListComponent implements OnInit {
       this.getCommentsModel.sort = q['sort'];
       this.getCommentsModel.sortOrder = q['sortOrder'];
       this.getCommentsModel.page = q['page'] ?? 1;
-      this.getCommentsModel.pageCount = q['pageSize'] ?? 5;
+      this.getCommentsModel.pageCount = q['pageSize'] ?? 25;
       this.getAllComments();
     })
   }

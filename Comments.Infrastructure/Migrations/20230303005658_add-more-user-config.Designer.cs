@@ -4,14 +4,16 @@ using Comments.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Comments.Infrastructure.Migrations
 {
     [DbContext(typeof(CommentsDbContext))]
-    partial class CommentsContextModelSnapshot : ModelSnapshot
+    [Migration("20230303005658_add-more-user-config")]
+    partial class addmoreuserconfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

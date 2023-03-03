@@ -92,10 +92,8 @@ export class CommentItemComponent implements OnInit {
   }
 
   onShowAttachment(){
-    this.blobService.getBlob('comments', this.comment.id).subscribe(f => {
-      console.log(f);
-      const fileURL = URL.createObjectURL(f);
-      window.location.assign(fileURL);
+    this.blobService.getBlob('comments', this.comment.fileName).subscribe(f => {
+      window.location.assign(f);
     })
   }
 }

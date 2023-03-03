@@ -1,4 +1,5 @@
 <div class="comments-container">
+  <h2 class="comments-container__header">Write a comment</h2>
   <comment-form
     *ngIf="isAuthenticated"
     [hasCancelButton]="false"
@@ -26,6 +27,13 @@
       </select>
     </div>
 
+  </div>
+
+  <div
+    *ngIf="!comments"
+    class="comments-container__empty"
+  >
+    <p>No comments yet</p>
   </div>
 
   <div

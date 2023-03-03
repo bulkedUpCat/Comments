@@ -7,7 +7,7 @@ namespace Comments.Application.Common.Interfaces
 {
     public interface IStorageService
     {
-        Task<BlobInfo?> GetBlobAsync(
+        Task<string?> GetBlobAsync(
             string blobContainerName,
             string name, 
             CancellationToken cancellationToken = default);

@@ -3,6 +3,11 @@
 .comments-container{
   padding: 3rem;
 
+  &__header{
+    font-size: $font-size-default;
+    text-align: center;
+  }
+
   &__sorting{
     margin: 1.5rem;
     display: flex;
@@ -24,5 +29,11 @@
     & option{
       padding: .5rem;
     }
+  }
+
+  &__empty{
+    font-size: $font-size-default;
+    text-align: center;
+    font-weight: 600;
   }
 }

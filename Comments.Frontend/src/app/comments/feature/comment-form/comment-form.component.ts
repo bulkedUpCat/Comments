@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CommentSubmitModel } from 'src/app/models/comment';
 import { BlobService } from 'src/app/services/blob.service';
@@ -12,7 +12,7 @@ export class CommentFormComponent implements OnInit {
   commentForm!: UntypedFormGroup;
   editorConfig = {
     toolbar: [
-      ['bold','italic','code']
+      ['bold','italic','code', 'link']
     ]
   };
   captcha: string = '';
@@ -25,6 +25,8 @@ export class CommentFormComponent implements OnInit {
   @Output() handleSubmit: EventEmitter<CommentSubmitModel> = new EventEmitter<CommentSubmitModel>();
   @Output() handleCancel: EventEmitter<void> = new EventEmitter<void>();
 
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   constructor(
     private fb: FormBuilder) { }
 
@@ -34,13 +36,21 @@ export class CommentFormComponent implements OnInit {
 
   createForm(){
     this.commentForm = this.fb.group({
-      text: [null, [Validators.required]]
+      text: [null, [Validators.required, Validators.maxLength(10000)]]
     })
   }
 
   onSubmit(): void{
+    if (this.commentForm.get('text')?.errors){
+      this.error = true;
+      this.errorMessage = 'Enter some text (max 10000 characters)';
+      return;
+    }
+
     this.handleSubmit.emit({text: this.commentForm.value.text, formData: this.formData});
+    this.fileInput.nativeElement.value = "";
     this.commentForm.reset();
+    this.error = false;
   }
 
   onCancel(): void{
@@ -49,10 +59,7 @@ export class CommentFormComponent implements OnInit {
   }
 
   onEditorContentChange(event: any){
-    // if (event.editor.getLength() > 10){
-    //   console.log('too long');
-    //   event.editor.deleteText(10, event.editor.getLength());
-    // }
+
   }
 
   resolved(captchaResponse: string){
@@ -73,4 +80,20 @@ export class CommentFormComponent implements OnInit {
       this.formData.append('file', files[0]);
     }
   }
+
+  // resizeImage(imageURL: any): Promise<any> {
+  //   return new Promise((resolve) => {
+  //     var image = new Image();
+  //     image.onload = function () {
+  //       var canvas = document.createElement('canvas');
+  //       var ctx = canvas.getContext('2d');
+  //       if (ctx != null) {
+  //         ctx.drawImage(image, 0, 0, 640, 480);
+  //       }
+  //       var data = canvas.toBlob('sdf')
+  //       resolve(data);
+  //     };
+  //     image.src = imageURL;
+  //   });
+  // }
 }

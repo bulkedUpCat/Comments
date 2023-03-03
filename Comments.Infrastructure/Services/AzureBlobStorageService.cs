@@ -17,7 +17,7 @@ namespace Comments.Infrastructure.Services
             _blobServiceClient = blobServiceClient;
         }
 
-        public async Task<BlobInfo> GetBlobAsync(
+        public async Task<string> GetBlobAsync(
             string blobContainerName, 
             string name, 
             CancellationToken cancellationToken = default)
@@ -29,9 +29,8 @@ namespace Comments.Infrastructure.Services
             {
                 return null;
             }
-
-            var blobDownloadInfo = await blobClient.DownloadAsync(cancellationToken);
-            return new BlobInfo{Content = blobDownloadInfo.Value.Content, ContentType = blobDownloadInfo.Value.ContentType};
+            
+            return blobClient.Uri.ToString();
         }
 
         public async Task UploadFileAsync(

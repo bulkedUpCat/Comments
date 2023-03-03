@@ -3,7 +3,7 @@ export class CommentModel{
   userName!: string;
   userId!: string;
   text!: string;
-  hasAttachment!: boolean;
+  fileName!: string;
   createdAt!: Date;
   parentCommentId!: string;
   replies!: CommentModel[];

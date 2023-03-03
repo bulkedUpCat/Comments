@@ -27,11 +27,14 @@ namespace Comments.Application.Comments.Commands.UploadAttachment
             var comment = await _commentRepository.GetByIdAsync(request.Id, cancellationToken)
                           ?? throw new CommentNotFoundException(request.Id);
 
-            await _storageService
-                .UploadFileAsync(request.File, "comments", comment.Id.ToString(), cancellationToken);
+            var contentType = request.File.ContentType.Split('/')[1];
+            var fileName = comment.Id + "." + contentType;
 
-            comment.HasAttachment = true;
-            
+            await _storageService
+                .UploadFileAsync(request.File, "comments", fileName, cancellationToken);
+
+            comment.FileName = fileName;
+
             _commentRepository.Update(comment);
             await _context.SaveChangesAsync(cancellationToken);
         }

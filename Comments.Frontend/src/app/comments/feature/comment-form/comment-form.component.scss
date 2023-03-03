@@ -26,11 +26,15 @@
     padding: 1rem;
     cursor: pointer;
     font-size: $font-size-default;
-    border-radius: 100px;
   }
 
   &__captcha{
     margin: 2rem;
+  }
+
+  &__errors{
+    font-size: $font-size-small;
+    color: $color-red;
   }
 }
 

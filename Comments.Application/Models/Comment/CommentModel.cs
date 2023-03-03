@@ -11,7 +11,7 @@ namespace Comments.Application.Models.Comment
         public string Email { get; set; }
         public string HomePage { get; set; }
         public string Text { get; set; }
-        public bool HasAttachment { get; set; }
+        public string FileName { get; set; }
         public DateTime CreatedAt { get; set; }
         public IEnumerable<CommentModel> Replies { get; set; }
     }

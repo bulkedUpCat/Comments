@@ -13,6 +13,17 @@ namespace Comments.Infrastructure.Data.Configurations
                 .WithOne(c => c.User)
                 .HasForeignKey(c => c.UserId)
                 .IsRequired(false);
+
+            builder
+                .Property(u => u.Email)
+                .IsRequired();
+
+            builder
+                .Property(u => u.UserName)
+                .IsRequired();
+
+            builder.HasIndex(u => u.Email)
+                .IsUnique();
         }
     }
 }
